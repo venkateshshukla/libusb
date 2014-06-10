@@ -31,6 +31,16 @@
 #ifdef HAVE_SYS_TIME_H
 #include <sys/time.h>
 #endif
+
+#ifdef __ANDROID__
+/* Copied Verbatim from glibc */
+/* Macro for converting between 'struct timespec' and 'struct timeval' */
+#define TIMESPEC_TO_TIMEVAL(tv, ts) {		\
+	(tv)->tv_sec = (ts)->tv_sec;			\
+	(tv)->tv_usec = (ts)->tv_nsec/1000;		\
+}
+#endif
+
 #ifdef USBI_TIMERFD_AVAILABLE
 #include <sys/timerfd.h>
 #endif
