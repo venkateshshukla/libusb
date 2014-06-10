@@ -623,8 +623,15 @@ struct usbi_os_backend {
 	 * Do not worry about freeing the handle on failed open, the upper layers
 	 * do this for you.
 	 */
-	int (*open)(struct libusb_device_handle *handle);
+	 int (*open)(struct libusb_device_handle *handle);
 
+#ifdef __ANDROID__
+	 /*
+	  * Using android USB API, open the device.
+	  * The fd is substututed as such
+	  */
+	 int (*open_fd)(struct libusb_device_handle *handle, int fd);
+#endif
 	/* Close a device such that the handle cannot be used again. Your backend
 	 * should destroy any resources that were allocated in the open path.
 	 * This may also be a good place to call usbi_remove_pollfd() to inform
