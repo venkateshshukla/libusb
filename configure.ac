@@ -123,7 +123,6 @@ case $is_backend_android in
 yes)
 	dnl some pthread functions is in libc
 	THREAD_CFLAGS="-c"
-	LIBS="${LIBS} -c"
 	dnl there are gettimeofday function but configure doesn't seem to be able to find it.
 	AC_DEFINE([HAVE_GETTIMEOFDAY], [1], [Define if you have gettimeofday])
 	;;
